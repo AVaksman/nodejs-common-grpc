@@ -18,7 +18,8 @@
  * @module commonGrpc/serviceObject
  */
 
-import {Metadata, MetadataCallback, ResponseCallback, ServiceObject, ServiceObjectConfig, SetMetadataResponse, util} from '@google-cloud/common';
+import {util, ServiceObject} from '@google-cloud/common';
+import {Metadata, MetadataCallback, RequestResponse, ResponseCallback, ServiceObjectConfig, SetMetadataResponse} from '@google-cloud/common/build/src/service-object';
 import {promisifyAll} from '@google-cloud/promisify';
 import * as extend from 'extend';
 import * as r from 'request';
@@ -102,7 +103,7 @@ export class GrpcServiceObject extends ServiceObject {
    *
    * @private
    */
-  request(...args: Array<{}>) {
+  request(...args: Array<{}>): Promise<RequestResponse> {
     return this.parent.request.apply(this.parent, args);
   }
 
@@ -111,7 +112,7 @@ export class GrpcServiceObject extends ServiceObject {
    *
    * @private
    */
-  requestStream(...args: Array<{}>) {
+  requestStream(...args: Array<{}>): r.Request {
     return this.parent.requestStream.apply(this.parent, args);
   }
 
